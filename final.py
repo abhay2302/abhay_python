@@ -9,6 +9,8 @@ from Tkinter import *
 import Tkinter as tk, Tkconstants, tkFileDialog
 import os
 import sys
+from tkMessageBox import *
+
 path_to_native ="/home/user/Abhay/jellyfish/tools/sanity_test/native_test"
 
 class App:
@@ -40,7 +42,7 @@ class App:
     def say_hi(self):
         status="Status: install ok installed\n"
         found=0
-        tt=os.system("dpkg -s libxml2 > some.txt")
+        tt=os.system("dpkg -s libxml > some.txt")
         with open("some.txt",'r') as file:
             for line in file:
                 if status in line:
@@ -50,6 +52,7 @@ class App:
 
             print("Package is already installed, Please Load Test Cases")
         else:
+            showerror("Error","libxml2 package not found")
             print("package not installed, Please Installed libxml2 ")
         
     def startTest(self):
