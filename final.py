@@ -16,29 +16,41 @@ class App:
         frame=Frame(master)
         frame.pack()
         self.xml_file=""
-        #root1=Frame(master,height=800,width=900)
-        #root1.pack_propagate(0)
-        #root1.pack()
-        #self.var1=IntVar()
-        #self.var2 = IntVar()
-        #messg='Note : This build has dependcies with libxml2 package.\n If not istalled already please install this poackage using below command sudo apt-get install libxml2-dev'
+       
         messg="Test Suit - Native Test App"
         self.button=Button(frame,text=messg,fg='red',bg='lightblue',font=('times',20,'italic')).grid(pady=8,padx=15)#pack(side=LEFT)
-        #msg=self.button = Button(
-         #   frame, text="QUIT", fg="red", command=frame.quit
-          #  ).grid(row=1, sticky=W)
-        #msg.config(bg='lightgreen', font=('times', 14, 'italic'))
-        #self.msg.grid(row=1, sticky=W)#pack(side=LEFT)
+
+
+
+        self.hi_there = Button(frame, text="Check Compitability",fg='green',font=('times',18), command=self.say_hi)
+        self.hi_there.grid(row=1,column=0,sticky=W)#pack(side=LEFT
+        
+        
         self.quit1=Button(frame,text="QUIT", fg="red",bg='orange',font=('times',18),command=frame.quit)
-        self.quit1.grid(row=1,column=1,sticky=E,pady=8)#pack(side=LEFT)
+        self.quit1.grid(row=2,column=1,sticky=E,pady=8)#pack(side=LEFT)
         self.hi_there = Button(frame, text="Load Test Case",fg='green',bg='lightyellow',font=('times',18), command=self.Load_case)
-        self.hi_there.grid(row=1,column=0,pady=10,sticky=W)#pack(side=LEFT)
-        self.button1=Button(frame,text="start",fg='red',bg='lightgreen',font=('times',18),command=self.startTest)
+        self.hi_there.grid(row=2,column=0,pady=10,sticky=W)#pack(side=LEFT)
+        self.button1=Button(frame,text="Start",fg='red',bg='lightgreen',font=('times',18),command=self.startTest)
         self.button1.grid(row=3,pady=5)#pack(side=LEFT)
         #self.check1=Checkbutton(frame, text="[-s sensor or --sensor=]", variable=self.var1).grid(row=3, sticky=W)
         #self.var2 = IntVar()
         #self.check2=Checkbutton(frame, text="[-e event type or --event=]", variable=self.var2).grid(row=4,sticky=W)
-            
+        
+        
+    def say_hi(self):
+        status="Status: install ok installed\n"
+        found=0
+        tt=os.system("dpkg -s libxml2 > some.txt")
+        with open("some.txt",'r') as file:
+            for line in file:
+                if status in line:
+                    found=1
+        
+        if found ==1:
+
+            print("Package is already installed, Please Load Test Cases")
+        else:
+            print("package not installed, Please Installed libxml2 ")
         
     def startTest(self):
         print "hi test started"
